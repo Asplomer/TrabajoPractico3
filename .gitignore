@@ -1,3 +1,6 @@
 
 *.db
 *.opendb
+.vs
+bin
+obj
