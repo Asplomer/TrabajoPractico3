@@ -2,11 +2,11 @@
 #include <allegro5/allegro.h>
 #include "allegro5/allegro_image.h"
 #include "allegro5/allegro_native_dialog.h"
+#include "Player.h"
 
 const float FPS = 60;
 const int SCREEN_W = 640;
 const int SCREEN_H = 480;
-const int BOUNCER_SIZE = 32;
 
 bool rect_overlaps(const float x1, const float y1, const float w1, const float h1, const float x2, const float y2, const float w2, const float h2) {
 
@@ -19,12 +19,8 @@ int main(int argc, char **argv)
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 	ALLEGRO_TIMER *timer = NULL;
-	ALLEGRO_BITMAP *mario = NULL;
 	ALLEGRO_BITMAP *enemy = NULL;
-	float positionX = 0;
-	float positionY =0 ;
-	float marioW = 64;
-	float marioH = 64;
+	Player* mario;
 	float enemyPositionX = SCREEN_W - 128;
 	float enemyPositionY = SCREEN_H - 128;
 	float enemyW = 64;
@@ -64,13 +60,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	mario = al_load_bitmap("Asset/Mario.png");
-	if (!mario) {
-		fprintf(stderr, "failed to create bouncer bitmap!\n");
-		al_destroy_display(display);
-		al_destroy_timer(timer);
-		return -1;
-	}
+	mario = new Player(0, 0);
 
 	enemy = al_load_bitmap("Asset/Goomba.png");
 	if (!enemy) {
@@ -80,7 +70,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	al_set_target_bitmap(mario);
+	al_set_target_bitmap(mario->GetSprite());
 	al_set_target_bitmap(enemy);
 
 	al_set_target_bitmap(al_get_backbuffer(display));
@@ -88,7 +78,7 @@ int main(int argc, char **argv)
 	event_queue = al_create_event_queue();
 	if (!event_queue) {
 		fprintf(stderr, "failed to create event_queue!\n");
-		al_destroy_bitmap(mario);
+		al_destroy_bitmap(mario->GetSprite());
 		al_destroy_bitmap(enemy);
 		al_destroy_display(display);
 		al_destroy_timer(timer);
@@ -115,18 +105,9 @@ int main(int argc, char **argv)
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
 			redraw = true;
 		}
+
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			break;
-		}
-		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-			if (ev.keyboard.keycode == ALLEGRO_KEY_DOWN)
-				positionY += 10;
-			else if (ev.keyboard.keycode == ALLEGRO_KEY_UP)
-				positionY -= 10;
-			else if (ev.keyboard.keycode == ALLEGRO_KEY_LEFT)
-				positionX -= 10;
-			else if (ev.keyboard.keycode == ALLEGRO_KEY_RIGHT)
-				positionX += 10;
 		}
 		if (enemyPositionX <= 0 && enemyDirX != 1)
 			enemyDirX = 1;
@@ -143,18 +124,21 @@ int main(int argc, char **argv)
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
-			al_draw_bitmap(mario, positionX, positionY, 0);
+			al_draw_bitmap(mario->GetSprite(), mario->GetPosX(), mario->GetPosY(), 0);
 			al_draw_bitmap(enemy, enemyPositionX, enemyPositionY, 0);
 
 			al_flip_display();
 		}
-		if (rect_overlaps(positionX,positionY,marioW,marioH,enemyPositionX,enemyPositionY,enemyW,enemyH))
+
+		mario->Update(ev);
+
+		if (rect_overlaps(mario->GetPosX(),mario->GetPosY(),mario->CollisionW(),mario->CollisionH(),enemyPositionX,enemyPositionY,enemyW,enemyH))
 		{
 			gameOver = true;
 		}
 	}
 
-	al_destroy_bitmap(mario);
+	al_destroy_bitmap(mario->GetSprite());
 	al_destroy_bitmap(enemy);
 	al_destroy_timer(timer);
 	al_destroy_display(display);
