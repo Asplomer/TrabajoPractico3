@@ -9,6 +9,8 @@ Enemy::Enemy(float x, float y)
 	positionY = y;
 	spriteH = 64;
 	spriteW = 64;
+	directionX = -1;
+	directionY = -1;
 }
 
 
@@ -16,13 +18,23 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Movimiento()
+void Enemy::Movimiento(const int SCREEN_W, const int SCREEN_H)
 {
+	if (positionX <= 0 && directionX != 1)
+		directionX = 1;
+	else if (positionX >= SCREEN_W - spriteW && directionX != -1)
+		directionX = -1;
+	if (positionY <= 0 && directionY != 1)
+		directionY = 1;
+	else if (positionY >= SCREEN_H - spriteH && directionY != -1)
+		directionY = -1;
+	positionY += directionY * 2;
+	positionX += directionX * 2;
 }
 
-void Enemy::Update()
+void Enemy::Update(const int SCREEN_W, const int SCREEN_H)
 {
-	Movimiento();
+	Movimiento(SCREEN_W, SCREEN_H);
 }
 
 ALLEGRO_BITMAP * Enemy::GetSprite()
@@ -32,20 +44,20 @@ ALLEGRO_BITMAP * Enemy::GetSprite()
 
 float Enemy::GetPosX()
 {
-	return 0.0f;
+	return positionX;
 }
 
 float Enemy::GetPosY()
 {
-	return 0.0f;
+	return positionY;
 }
 
 float Enemy::CollisionW()
 {
-	return 0.0f;
+	return spriteW;
 }
 
 float Enemy::CollisionH()
 {
-	return 0.0f;
+	return spriteH;
 }

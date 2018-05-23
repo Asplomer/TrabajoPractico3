@@ -14,11 +14,13 @@ private:
 	float positionY;
 	float spriteW;
 	float spriteH;
+	int directionX;
+	int directionY;
 public:
 	Enemy(float x, float y);
 	~Enemy();
-	void Movimiento();
-	void Update();
+	void Movimiento(const int SCREEN_W, const int SCREEN_H);
+	void Update(const int SCREEN_W, const int SCREEN_H);
 	ALLEGRO_BITMAP* GetSprite();
 	float GetPosX();
 	float GetPosY();
