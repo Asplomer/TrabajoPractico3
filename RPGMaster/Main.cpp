@@ -130,11 +130,11 @@ int main(int argc, char **argv)
 		}
 		if (enemyPositionX <= 0 && enemyDirX != 1)
 			enemyDirX = 1;
-		else if (enemyPositionX >= SCREEN_W && enemyDirX != -1)
+		else if (enemyPositionX >= SCREEN_W - enemyW && enemyDirX != -1)
 			enemyDirX = -1;
 		if (enemyPositionY <= 0 && enemyDirY != 1)
 			enemyDirY = 1;
-		else if (enemyPositionY >= SCREEN_H && enemyDirY != -1)
+		else if (enemyPositionY >= SCREEN_H - enemyH && enemyDirY != -1)
 			enemyDirY = -1;
 		enemyPositionY += enemyDirY * 2;
 		enemyPositionX += enemyDirX * 2;
