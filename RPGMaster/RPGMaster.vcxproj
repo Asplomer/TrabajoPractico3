@@ -116,6 +116,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)RPGMaster\Allegro\allegro_5.1.12_x86\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>allegro.lib;allegro_color.lib;allegro_dialog.lib;allegro_image.lib;allegro_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)RPGMaster\Allegro\allegro_5.1.12_x86\bin\*dll" "$(OutDir)" /y /n</Command>

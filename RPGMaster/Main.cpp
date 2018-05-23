@@ -8,6 +8,12 @@ const int SCREEN_W = 640;
 const int SCREEN_H = 480;
 const int BOUNCER_SIZE = 32;
 
+bool rect_overlaps(const float x1, const float y1, const float w1, const float h1, const float x2, const float y2, const float w2, const float h2) {
+
+	return ((x1 < x2 + w2) && (x2 < x1 + w1) && (y1 < y2 + h2) && (y2 < y1 + h1));
+
+}
+
 int main(int argc, char **argv)
 {
 	ALLEGRO_DISPLAY *display = NULL;
@@ -15,14 +21,16 @@ int main(int argc, char **argv)
 	ALLEGRO_TIMER *timer = NULL;
 	ALLEGRO_BITMAP *mario = NULL;
 	ALLEGRO_BITMAP *enemy = NULL;
-	float positionX = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
-	float positionY = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
-	float marioW = 128;
-	float marioH = 128;
-	float enemyPositionX = 0;
-	float enemyPositionY = 0;
-	float enemyW = 128;
-	float enemyH = 128;
+	float positionX = 0;
+	float positionY =0 ;
+	float marioW = 64;
+	float marioH = 64;
+	float enemyPositionX = SCREEN_W - 128;
+	float enemyPositionY = SCREEN_H - 128;
+	float enemyW = 64;
+	float enemyH = 64;
+	int enemyDirX = -1;
+	int enemyDirY = -1;
 	bool redraw = true;
 	bool gameOver = false;
 
@@ -120,15 +128,29 @@ int main(int argc, char **argv)
 			else if (ev.keyboard.keycode == ALLEGRO_KEY_RIGHT)
 				positionX += 10;
 		}
-
+		if (enemyPositionX <= 0 && enemyDirX != 1)
+			enemyDirX = 1;
+		else if (enemyPositionX >= SCREEN_W && enemyDirX != -1)
+			enemyDirX = -1;
+		if (enemyPositionY <= 0 && enemyDirY != 1)
+			enemyDirY = 1;
+		else if (enemyPositionY >= SCREEN_H && enemyDirY != -1)
+			enemyDirY = -1;
+		enemyPositionY += enemyDirY * 2;
+		enemyPositionX += enemyDirX * 2;
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
 			al_draw_bitmap(mario, positionX, positionY, 0);
+			al_draw_bitmap(enemy, enemyPositionX, enemyPositionY, 0);
 
 			al_flip_display();
+		}
+		if (rect_overlaps(positionX,positionY,marioW,marioH,enemyPositionX,enemyPositionY,enemyW,enemyH))
+		{
+			gameOver = true;
 		}
 	}
 
