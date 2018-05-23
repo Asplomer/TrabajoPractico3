@@ -4,16 +4,11 @@
 #include "allegro5/allegro_native_dialog.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Collision.h"
 
 const float FPS = 60;
 const int SCREEN_W = 640;
 const int SCREEN_H = 480;
-
-bool rect_overlaps(const float x1, const float y1, const float w1, const float h1, const float x2, const float y2, const float w2, const float h2) {
-
-	return ((x1 < x2 + w2) && (x2 < x1 + w1) && (y1 < y2 + h2) && (y2 < y1 + h1));
-
-}
 
 int main(int argc, char **argv)
 {
@@ -110,6 +105,7 @@ int main(int argc, char **argv)
 
 		mario->Update(ev);
 		goomba->Update(SCREEN_W,SCREEN_H);
+
 
 		if (rect_overlaps(mario->GetPosX(),mario->GetPosY(),mario->CollisionW(),mario->CollisionH(), goomba->GetPosX(), goomba->GetPosY(),goomba->CollisionW(),goomba->CollisionH()))
 		{
