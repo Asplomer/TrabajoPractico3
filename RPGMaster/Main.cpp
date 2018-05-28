@@ -92,12 +92,13 @@ int main(int argc, char **argv)
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			break;
 		}
+
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
-			al_draw_bitmap(mario->GetSprite(), mario->GetPosX(), mario->GetPosY(), 0);
+			//al_draw_bitmap(mario->GetSprite(), mario->GetPosX(), mario->GetPosY(),0);
 			al_draw_bitmap(goomba->GetSprite(), goomba->GetPosX(), goomba->GetPosY(), 0);
 
 			al_flip_display();
@@ -106,8 +107,7 @@ int main(int argc, char **argv)
 		mario->Update(ev);
 		goomba->Update(SCREEN_W,SCREEN_H);
 
-
-		if (rect_overlaps(mario->GetPosX(),mario->GetPosY(),mario->CollisionW(),mario->CollisionH(), goomba->GetPosX(), goomba->GetPosY(),goomba->CollisionW(),goomba->CollisionH()))
+		if (Collision::AABB(mario->GetPosX(), mario->GetPosY(), mario->CollisionW(), mario->CollisionH(), goomba->GetPosX(), goomba->GetPosY(), goomba->CollisionW(), goomba->CollisionH()))
 		{
 			gameOver = true;
 		}
