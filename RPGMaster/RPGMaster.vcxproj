@@ -90,7 +90,7 @@
       <AdditionalDependencies>allegro.lib;allegro_color.lib;allegro_dialog.lib;allegro_image.lib;allegro_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)RPGMaster\Allegro\allegro_5.1.12_x86\bin\*dll" "$(OutDir)" /y /n</Command>
+      <Command>copy "$(SolutionDir)Allegro\allegro_5.1.12_x86\bin\*dll" "$(OutDir)" /y /n</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,7 +119,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)RPGMaster\Allegro\allegro_5.1.12_x86\bin\*dll" "$(OutDir)" /y /n</Command>
+      <Command>copy "$(SolutionDir)Allegro\allegro_5.1.12_x86\bin\*dll" "$(OutDir)" /y /n</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
