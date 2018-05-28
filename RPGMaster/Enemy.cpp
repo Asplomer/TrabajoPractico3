@@ -37,6 +37,11 @@ void Enemy::Update(const int SCREEN_W, const int SCREEN_H)
 	Movimiento(SCREEN_W, SCREEN_H);
 }
 
+void Enemy::Draw()
+{
+	al_draw_bitmap(sprite, positionX, positionY, 0);
+}
+
 ALLEGRO_BITMAP * Enemy::GetSprite()
 {
 	return sprite;

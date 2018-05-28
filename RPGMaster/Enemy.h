@@ -21,6 +21,7 @@ public:
 	~Enemy();
 	void Movimiento(const int SCREEN_W, const int SCREEN_H);
 	void Update(const int SCREEN_W, const int SCREEN_H);
+	void Draw();
 	ALLEGRO_BITMAP* GetSprite();
 	float GetPosX();
 	float GetPosY();

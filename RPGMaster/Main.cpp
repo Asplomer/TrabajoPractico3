@@ -85,10 +85,13 @@ int main(int argc, char **argv)
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 
+
+		mario->Update(ev);
+		goomba->Update(SCREEN_W, SCREEN_H);
+
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
 			redraw = true;
 		}
-
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			break;
 		}
@@ -99,14 +102,10 @@ int main(int argc, char **argv)
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
 			mario->Draw();
-			//al_draw_bitmap(mario->GetSprite(), mario->GetPosX(), mario->GetPosY(),0);
-			al_draw_bitmap(goomba->GetSprite(), goomba->GetPosX(), goomba->GetPosY(), 0);
+			goomba->Draw();
 
 			al_flip_display();
 		}
-
-		mario->Update(ev);
-		goomba->Update(SCREEN_W,SCREEN_H);
 
 		if (Collision::AABB(mario->GetPosX(), mario->GetPosY(), mario->CollisionW(), mario->CollisionH(), goomba->GetPosX(), goomba->GetPosY(), goomba->CollisionW(), goomba->CollisionH()))
 		{
