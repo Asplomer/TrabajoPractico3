@@ -18,6 +18,7 @@ public:
 	~Player();
 	void Movimiento(ALLEGRO_EVENT ev);
 	void Update(ALLEGRO_EVENT ev);
+	void Draw();
 	ALLEGRO_BITMAP* GetSprite();
 	float GetPosX();
 	float GetPosY();

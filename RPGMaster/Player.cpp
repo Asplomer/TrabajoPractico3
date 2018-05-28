@@ -33,6 +33,11 @@ void Player::Update(ALLEGRO_EVENT ev) {
 	Movimiento(ev);
 }
 
+void Player::Draw()
+{
+	al_draw_bitmap(sprite, positionX, positionY, 0);
+}
+
 ALLEGRO_BITMAP* Player::GetSprite()
 {
 	return sprite;

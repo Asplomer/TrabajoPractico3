@@ -98,6 +98,7 @@ int main(int argc, char **argv)
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
+			mario->Draw();
 			//al_draw_bitmap(mario->GetSprite(), mario->GetPosX(), mario->GetPosY(),0);
 			al_draw_bitmap(goomba->GetSprite(), goomba->GetPosX(), goomba->GetPosY(), 0);
 
