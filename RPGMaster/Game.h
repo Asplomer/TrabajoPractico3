@@ -7,6 +7,7 @@
 #include <allegro5/allegro_native_dialog.h>
 #include "Player.h"
 #include "Enemy.h"
+#include "Collision.h"
 
 class Game
 {
@@ -27,7 +28,6 @@ public:
 	int Initialize();
 	void Draw();
 	void Update();
-	void Input();
 	int EventInit();
 	bool IsGameOver();
 };
