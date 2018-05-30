@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <stdio.h>
+#include <iostream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -12,9 +13,9 @@
 class Game
 {
 private:
-	ALLEGRO_DISPLAY * display = NULL;
-	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-	ALLEGRO_TIMER *timer = NULL;
+	ALLEGRO_DISPLAY* display = NULL;
+	ALLEGRO_EVENT_QUEUE* event_queue = NULL;
+	ALLEGRO_TIMER* timer = NULL;
 	bool redraw = true;
 	bool gameOver = false;
 	int SCREEN_W;
@@ -29,6 +30,8 @@ public:
 	void Draw();
 	void Update();
 	int EventInit();
+	int CreateWindow();
+	int CreateTimer();
 	bool IsGameOver();
 };
 
