@@ -10,3 +10,9 @@ bool Collision::AABB(Player* p, Enemy* e)
 	return ((p->GetPosX() < e->GetPosX() + e->CollisionW()) && (e->GetPosX() < p->GetPosX() + p->CollisionW()) 
 		&& (p->GetPosY() < e->GetPosY() + e->CollisionH()) && (e->GetPosY() < p->GetPosY() + p->CollisionH()));
 }
+
+bool Collision::AABB(Player* p, Moneda* m)
+{
+	return ((p->GetPosX() < m->GetPosX() + m->GetWidth()) && (m->GetPosX() < p->GetPosX() + p->CollisionW())
+		&& (p->GetPosY() < m->GetPosY() + m->GetHeight()) && (m->GetPosY() < p->GetPosY() + p->CollisionH()));
+}
