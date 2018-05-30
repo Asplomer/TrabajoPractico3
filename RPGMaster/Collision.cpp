@@ -4,3 +4,9 @@ bool Collision::AABB(const float x1, const float y1, const float w1, const float
 {
 	return ((x1 < x2 + w2) && (x2 < x1 + w1) && (y1 < y2 + h2) && (y2 < y1 + h1));
 }
+
+bool Collision::AABB(Player* p, Enemy* e)
+{
+	return ((p->GetPosX() < e->GetPosX() + e->CollisionW()) && (e->GetPosX() < p->GetPosX() + p->CollisionW()) 
+		&& (p->GetPosY() < e->GetPosY() + e->CollisionH()) && (e->GetPosY() < p->GetPosY() + p->CollisionH()));
+}
