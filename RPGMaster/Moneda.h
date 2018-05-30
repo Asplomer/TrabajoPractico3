@@ -19,7 +19,7 @@ public:
 	int getPosY();
 	int getWidth();
 	int getHeight();
-
+	void Take();
 };
 
 #endif // !MONEDA_H
