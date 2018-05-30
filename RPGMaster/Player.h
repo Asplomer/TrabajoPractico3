@@ -17,8 +17,8 @@ private:
 public:
 	Player(float posX, float posY);
 	~Player();
-	void Movimiento(ALLEGRO_EVENT ev);
-	void Update(ALLEGRO_EVENT ev);
+	void Movimiento(ALLEGRO_EVENT ev, int SCREEN_W, int SCREEN_H);
+	void Update(ALLEGRO_EVENT ev, int SCREEN_W, int SCREEN_H);
 	void Draw();
 	ALLEGRO_BITMAP* GetSprite();
 	float GetPosX();

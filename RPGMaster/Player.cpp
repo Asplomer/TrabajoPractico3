@@ -14,7 +14,7 @@ Player::~Player()
 {
 }
 
-void Player::Movimiento(ALLEGRO_EVENT ev)
+void Player::Movimiento(ALLEGRO_EVENT ev, int SCREEN_W, int SCREEN_H)
 {
 	if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
 		if (ev.keyboard.keycode == ALLEGRO_KEY_DOWN)
@@ -26,10 +26,18 @@ void Player::Movimiento(ALLEGRO_EVENT ev)
 		else if (ev.keyboard.keycode == ALLEGRO_KEY_RIGHT)
 			positionX += 10;
 	}
+	if (positionX < 0)
+		positionX = 0;
+	else if (positionX > SCREEN_W - spriteW)
+		positionX = SCREEN_W - spriteW;
+	if (positionY < 0)
+		positionY = 0;
+	else if (positionY > SCREEN_H - spriteH)
+		positionY = SCREEN_H - spriteH;
 }
 
-void Player::Update(ALLEGRO_EVENT ev) {
-	Movimiento(ev);
+void Player::Update(ALLEGRO_EVENT ev, int SCREEN_W, int SCREEN_H) {
+	Movimiento(ev, SCREEN_W, SCREEN_H);
 }
 
 void Player::Draw()
