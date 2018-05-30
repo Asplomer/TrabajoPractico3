@@ -1,7 +1,5 @@
 #include "Game.h"
 
-Moneda* m0;
-
 Game::Game(int _SCREEN_W, int _SCREEN_H, int _FPS)
 {
 	SCREEN_W = _SCREEN_W;
@@ -20,6 +18,9 @@ Game::~Game()
 	al_destroy_event_queue(event_queue);
 	delete mario;
 	delete goomba;
+	delete m0;
+	delete m1;
+	delete m2;
 }
 
 int Game::Initialize()
@@ -49,12 +50,16 @@ int Game::Initialize()
 	mario = new Player(0, 0);
 	goomba = new Enemy(SCREEN_W - 128, SCREEN_H - 128);
 	m0 = new Moneda(100, 50);
+	m1 = new Moneda(50, 300);
+	m2 = new Moneda(300, 400);
 	// SE CREA INPUT
 	EventInit();
 	// SE REGISTRAN IMAGENES Y EVENTOS
 	al_set_target_bitmap(mario->GetSprite());
 	al_set_target_bitmap(goomba->GetSprite());
 	al_set_target_bitmap(m0->GetSprite());
+	al_set_target_bitmap(m1->GetSprite());
+	al_set_target_bitmap(m2->GetSprite());
 	al_set_target_bitmap(al_get_backbuffer(display));
 
 	al_register_event_source(event_queue, al_get_display_event_source(display));
@@ -64,6 +69,8 @@ int Game::Initialize()
 	al_clear_to_color(al_map_rgb(255, 255, 255));
 	al_flip_display();
 	al_start_timer(timer);
+
+	return 0;
 }
 
 void Game::Draw()
@@ -74,6 +81,8 @@ void Game::Draw()
 		mario->Draw();
 		goomba->Draw();
 		m0->Draw();
+		m1->Draw();
+		m2->Draw();
 		al_flip_display();
 	}
 }
@@ -96,6 +105,10 @@ void Game::Update()
 		gameOver = true;
 	if (Collision::AABB(mario, m0))
 		m0->Take();
+	if (Collision::AABB(mario, m1))
+		m1->Take();
+	if (Collision::AABB(mario, m2))
+		m2->Take();
 }
 
 int Game::EventInit()
@@ -109,6 +122,7 @@ int Game::EventInit()
 		al_destroy_timer(timer);
 		return -1;
 	}
+	return 0;
 }
 
 int Game::CreateWindow()
@@ -119,6 +133,7 @@ int Game::CreateWindow()
 		al_destroy_timer(timer);
 		return -1;
 	}
+	return 0;
 }
 
 int Game::CreateTimer()
@@ -128,6 +143,7 @@ int Game::CreateTimer()
 		fprintf(stderr, "failed to create timer!\n");
 		return -1;
 	}
+	return 0;
 }
 
 bool Game::IsGameOver()
