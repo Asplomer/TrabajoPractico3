@@ -1,6 +1,5 @@
 #include "Player.h"
 
-
 Player::Player(float posX, float posY)
 {
 	sprite = al_load_bitmap("Asset/Mario.png");
