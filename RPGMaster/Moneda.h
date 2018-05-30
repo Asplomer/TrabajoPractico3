@@ -12,6 +12,7 @@ private:
 	int positionY;
 	int width;
 	int height;
+	bool taken = false;
 public:
 	Moneda(int posX, int posY);
 	~Moneda();
@@ -21,6 +22,7 @@ public:
 	int GetHeight();
 	ALLEGRO_BITMAP* GetSprite();
 	void Take();
+	void Draw();
 };
 
 #endif // !MONEDA_H

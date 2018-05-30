@@ -43,5 +43,15 @@ ALLEGRO_BITMAP * Moneda::GetSprite()
 
 void Moneda::Take()
 {
-	delete this;
+	if (!taken)
+	{
+		taken = true;
+		sprite = NULL;
+	}
+}
+
+void Moneda::Draw()
+{
+	if (!taken)
+		al_draw_bitmap(sprite, positionX, positionY, 0);
 }
