@@ -15,10 +15,11 @@ private:
 public:
 	Moneda(int posX, int posY);
 	~Moneda();
-	int getPosX();
-	int getPosY();
-	int getWidth();
-	int getHeight();
+	int GetPosX();
+	int GetPosY();
+	int GetWidth();
+	int GetHeight();
+	ALLEGRO_BITMAP* GetSprite();
 	void Take();
 };
 

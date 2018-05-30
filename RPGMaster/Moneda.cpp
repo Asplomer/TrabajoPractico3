@@ -16,24 +16,29 @@ Moneda::~Moneda()
 	al_destroy_bitmap(sprite);
 }
 
-int Moneda::getPosX()
+int Moneda::GetPosX()
 {
 	return positionX;
 }
 
-int Moneda::getPosY()
+int Moneda::GetPosY()
 {
 	return positionY;
 }
 
-int Moneda::getWidth()
+int Moneda::GetWidth()
 {
 	return width;
 }
 
-int Moneda::getHeight()
+int Moneda::GetHeight()
 {
 	return height;
+}
+
+ALLEGRO_BITMAP * Moneda::GetSprite()
+{
+	return sprite;
 }
 
 void Moneda::Take()
