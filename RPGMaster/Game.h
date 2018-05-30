@@ -24,6 +24,7 @@ private:
 	int FPS;
 	Player* mario;
 	Enemy* goomba;
+	Moneda* monedas = new Moneda[10];
 public:
 	Game(int SCREEN_W, int SCREEN_H, int FPS);
 	~Game();
