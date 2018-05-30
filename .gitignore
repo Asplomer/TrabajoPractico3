@@ -1,6 +1,3 @@
-
-*.db
-*.opendb
-.vs
-bin
 obj
+bin
+.vs
