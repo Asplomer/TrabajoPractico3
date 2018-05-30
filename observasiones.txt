@@ -1,0 +1,3 @@
+el proyecto fue hecho en visual studio 2017 en vez de 2015
+fue añadido todos los .h de allegro, haciendo que pese mucho mas de lo neceserario
+se llama varias veces a "al_set_target_bitmap" que el profesor dijo que no es correcto

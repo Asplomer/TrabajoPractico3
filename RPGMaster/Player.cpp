@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "Bullet.h"
 Player::Player(float posX, float posY)
 {
 	sprite = al_load_bitmap("Asset/Mario.png");
@@ -7,6 +7,8 @@ Player::Player(float posX, float posY)
 	positionY = posY;
 	spriteH = 64;
 	spriteW = 64;
+	right = false;
+	disparo = false;
 }
 
 
@@ -18,13 +20,23 @@ void Player::Movimiento(ALLEGRO_EVENT ev, int SCREEN_W, int SCREEN_H)
 {
 	if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
 		if (ev.keyboard.keycode == ALLEGRO_KEY_DOWN)
-			positionY += 10;
+			positionY += 20;
 		else if (ev.keyboard.keycode == ALLEGRO_KEY_UP)
-			positionY -= 10;
-		else if (ev.keyboard.keycode == ALLEGRO_KEY_LEFT)
-			positionX -= 10;
-		else if (ev.keyboard.keycode == ALLEGRO_KEY_RIGHT)
-			positionX += 10;
+			positionY -= 20;
+		else if (ev.keyboard.keycode == ALLEGRO_KEY_LEFT){
+			positionX -= 20;
+			right = true;
+		}
+		else if (ev.keyboard.keycode == ALLEGRO_KEY_RIGHT){
+			positionX += 20;	//originalmente era 10 en todos
+			right = false;
+		}
+		/*
+		else if (ev.keyboard.keycode == ALLEGRO_KEY_SPACE)
+		{
+			disparo = true;
+			
+		}*/
 	}
 	if (positionX < 0)
 		positionX = 0;
@@ -67,7 +79,9 @@ float Player::CollisionH()
 {
 	return spriteH;
 }
-
+float Player::GetRight() {
+	return right;
+}
 void Player::Move(float x, float y)
 {
 	positionX += x;

@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Collision.h"
 #include "Moneda.h"
+#include "Bullet.h"
 
 class Game
 {
@@ -25,6 +26,9 @@ private:
 	Player* mario;
 	Enemy* goomba;
 	Moneda* m0,* m1,* m2;
+	//
+	Bullet* bala;
+	//
 public:
 	Game(int SCREEN_W, int SCREEN_H, int FPS);
 	~Game();

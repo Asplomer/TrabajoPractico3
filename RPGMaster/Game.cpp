@@ -21,6 +21,9 @@ Game::~Game()
 	delete m0;
 	delete m1;
 	delete m2;
+	//
+	delete bala;
+	//
 }
 
 int Game::Initialize()
@@ -52,6 +55,9 @@ int Game::Initialize()
 	m0 = new Moneda(100, 50);
 	m1 = new Moneda(50, 300);
 	m2 = new Moneda(300, 400);
+	
+	bala = new Bullet(0,0, false);
+	
 	// SE CREA INPUT
 	EventInit();
 	// SE REGISTRAN IMAGENES Y EVENTOS
@@ -61,7 +67,9 @@ int Game::Initialize()
 	al_set_target_bitmap(m1->GetSprite());
 	al_set_target_bitmap(m2->GetSprite());
 	al_set_target_bitmap(al_get_backbuffer(display));
-
+	/*
+	al_set_target_bitmap(bala->GetSprite());
+	*/
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
@@ -83,6 +91,12 @@ void Game::Draw()
 		m0->Draw();
 		m1->Draw();
 		m2->Draw();
+		/*
+		if (!bala->GetDisp())
+		{
+			bala->Draw();
+		}
+		*/
 		al_flip_display();
 	}
 }
@@ -100,6 +114,12 @@ void Game::Update()
 	// UPDATE DE LOS PERSONAJES
 	mario->Update(ev, SCREEN_W,SCREEN_H);
 	goomba->Update(SCREEN_W, SCREEN_H);
+	/*
+	if (bala->GetDisp())
+	{
+		bala->Update(mario->GetPosX(), mario->GetPosY());
+	}
+	*/
 	// COLLISION PERSONAJES
 	if (Collision::AABB(mario,goomba))
 		gameOver = true;
@@ -118,6 +138,9 @@ int Game::EventInit()
 		fprintf(stderr, "failed to create event_queue!\n");
 		al_destroy_bitmap(mario->GetSprite());
 		al_destroy_bitmap(goomba->GetSprite());
+		//
+		al_destroy_bitmap(bala->GetSprite());
+		//
 		al_destroy_display(display);
 		al_destroy_timer(timer);
 		return -1;

@@ -5,6 +5,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
+//#include "Bullet.h"
 
 class Player
 {
@@ -14,6 +15,10 @@ private:
 	float positionY;
 	float spriteW;
 	float spriteH;
+	//agregado:
+	bool right;
+	bool disparo;
+	
 public:
 	Player(float posX, float posY);
 	~Player();
@@ -25,6 +30,7 @@ public:
 	float GetPosY();
 	float CollisionW();
 	float CollisionH();
+	float GetRight();
 	void Move(float x, float y);
 };
 
