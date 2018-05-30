@@ -1,5 +1,7 @@
 #include "Game.h"
 
+Moneda* m0;
+
 Game::Game(int _SCREEN_W, int _SCREEN_H, int _FPS)
 {
 	SCREEN_W = _SCREEN_W;
@@ -46,11 +48,13 @@ int Game::Initialize()
 	// SE CREAN PERSONAJES
 	mario = new Player(0, 0);
 	goomba = new Enemy(SCREEN_W - 128, SCREEN_H - 128);
+	m0 = new Moneda(100, 50);
 	// SE CREA INPUT
 	EventInit();
 	// SE REGISTRAN IMAGENES Y EVENTOS
 	al_set_target_bitmap(mario->GetSprite());
 	al_set_target_bitmap(goomba->GetSprite());
+	al_set_target_bitmap(m0->GetSprite());
 	al_set_target_bitmap(al_get_backbuffer(display));
 
 	al_register_event_source(event_queue, al_get_display_event_source(display));
@@ -69,6 +73,7 @@ void Game::Draw()
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		mario->Draw();
 		goomba->Draw();
+		m0->Draw();
 		al_flip_display();
 	}
 }
@@ -84,11 +89,13 @@ void Game::Update()
 		gameOver = true;
 	}
 	// UPDATE DE LOS PERSONAJES
-	mario->Update(ev);
+	mario->Update(ev, SCREEN_W,SCREEN_H);
 	goomba->Update(SCREEN_W, SCREEN_H);
 	// COLLISION PERSONAJES
 	if (Collision::AABB(mario,goomba))
 		gameOver = true;
+	if (Collision::AABB(mario, m0))
+		m0->Take();
 }
 
 int Game::EventInit()

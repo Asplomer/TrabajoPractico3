@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Collision.h"
+#include "Moneda.h"
 
 class Game
 {
