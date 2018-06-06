@@ -73,3 +73,12 @@ void Bullet::Move(bool right)
 		//positionY -= y;
 	}
 }
+bool Bullet::SetR(bool right) {
+	if (right){
+		r = false;
+	}
+	else {
+		r = true;
+	}
+	return r;
+}

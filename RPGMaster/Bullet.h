@@ -28,6 +28,7 @@
 		float CollisionH();
 		float GetDisp();
 		void Move(bool right);
+		bool SetR(bool right);
 	};
 
 #endif

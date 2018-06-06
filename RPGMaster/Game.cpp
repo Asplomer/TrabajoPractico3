@@ -95,6 +95,10 @@ void Game::Draw()
 		
 		if (mario->Pew())
 		{
+			
+				bala->SetR(mario->GetRight());
+			
+
 			bala->Draw();
 		}
 		
@@ -119,7 +123,6 @@ void Game::Update()
 	if (mario->Pew()/*bala->GetDisp()*/)
 	{
 		bala->Update(mario->GetPosX(), mario->GetPosY());
-		cout <<"" ;
 	}
 	
 	// COLLISION PERSONAJES
