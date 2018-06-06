@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Bullet.h"
+
+using namespace std;
 Player::Player(float posX, float posY)
 {
 	sprite = al_load_bitmap("Asset/Mario.png");
@@ -31,12 +33,12 @@ void Player::Movimiento(ALLEGRO_EVENT ev, int SCREEN_W, int SCREEN_H)
 			positionX += 20;	//originalmente era 10 en todos
 			right = false;
 		}
-		/*
+		
 		else if (ev.keyboard.keycode == ALLEGRO_KEY_SPACE)
 		{
 			disparo = true;
-			
-		}*/
+			cout << "pew";
+		}
 	}
 	if (positionX < 0)
 		positionX = 0;
@@ -86,4 +88,7 @@ void Player::Move(float x, float y)
 {
 	positionX += x;
 	positionY += y;
+}
+bool Player::Pew() {
+	return disparo;
 }

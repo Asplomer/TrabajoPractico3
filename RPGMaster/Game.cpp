@@ -1,4 +1,5 @@
 #include "Game.h"
+using namespace std;
 
 Game::Game(int _SCREEN_W, int _SCREEN_H, int _FPS)
 {
@@ -91,12 +92,12 @@ void Game::Draw()
 		m0->Draw();
 		m1->Draw();
 		m2->Draw();
-		/*
-		if (!bala->GetDisp())
+		
+		if (mario->Pew())
 		{
 			bala->Draw();
 		}
-		*/
+		
 		al_flip_display();
 	}
 }
@@ -114,12 +115,13 @@ void Game::Update()
 	// UPDATE DE LOS PERSONAJES
 	mario->Update(ev, SCREEN_W,SCREEN_H);
 	goomba->Update(SCREEN_W, SCREEN_H);
-	/*
-	if (bala->GetDisp())
+	
+	if (mario->Pew()/*bala->GetDisp()*/)
 	{
 		bala->Update(mario->GetPosX(), mario->GetPosY());
+		cout <<"" ;
 	}
-	*/
+	
 	// COLLISION PERSONAJES
 	if (Collision::AABB(mario,goomba))
 		gameOver = true;

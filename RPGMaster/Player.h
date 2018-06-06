@@ -32,6 +32,8 @@ public:
 	float CollisionH();
 	float GetRight();
 	void Move(float x, float y);
+
+	bool Pew();
 };
 
 #endif // !PLAYER_H

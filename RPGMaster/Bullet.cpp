@@ -5,8 +5,8 @@
 Bullet::Bullet(float posX, float posY, bool right)
 {
 	sprite = al_load_bitmap("Asset/Bullet.png");
-	positionX = posX;
-	positionY = posY;
+	positionX = posX+30;
+	positionY = posY+30;
 	spriteH = 8;
 	spriteW = 8;
 	Draw();
@@ -22,10 +22,8 @@ Bullet::~Bullet()
 
 
 void Bullet::Update(float x, float y) {
-	if (disp)
-	{
+
 		Move(r);
-	}
 	
 }
 
@@ -63,15 +61,15 @@ float Bullet::CollisionH()
 
 void Bullet::Move(bool right)
 {
-	if (right)
+	if (!right)
 	{
-		positionX += 2;
+		positionX += 4;
 		//positionY += y;
 	}
 	else
 	{
 
-		positionX -= 2;
+		positionX -= 4;
 		//positionY -= y;
 	}
 }
